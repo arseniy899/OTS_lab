@@ -1,0 +1,47 @@
+Source.NumBitsPerFrame = 1000;
+
+Encoder.isTransparent = true;
+Encoder.Type = '';
+Encoder.rateLDPC = dvbs2ldpc(3/5);
+
+Interleaver.isTransparent = true;
+Interleaver.order = randperm(32400)';
+
+Mapper.isTransparent = true;
+Mapper.Type = 'QAM';
+Mapper.ModulationOrder = 4;
+Mapper.PhaseOffset = 0;
+Mapper.SymbolMapping = 'Gray';
+Mapper.DecisionMethod = 'Approximate log-likelihood ratio';
+Sig.isTransparent = true;
+
+Channel.isTransparent = true;
+Channel.Type = 'AWGN';
+Channel.FadingType = '';
+
+BER.h2Precision = 2;
+BER.BERPrecision = 8;
+BER.BERNumRateDigits = 10;
+BER.FERNumRateDigits = 7;
+BER.MinNumTrFrames = 100;
+BER.h2dBInit = 8.4;
+BER.h2dBInitStep = 0.4;
+BER.h2dBMaxStep = 1.6;
+BER.h2dBMinStep = 0.1;
+BER.h2dBMax = 25;
+BER.MinBER = 10^-4;
+BER.MinNumErBits = 5*10^2;
+BER.MinFER = 1;
+BER.MinNumErFrames = 10^2;
+BER.MaxNumTrBits = 10^8;
+BER.MaxNumTrFrames = inf;
+BER.MaxBERRate = 5;
+BER.MinBERRate = 2;
+
+Common.SaveFileName = sprintf('Results%02d', ParamsNumber);
+Common.SaveDirName = 'Results';
+
+Common.NumOneIterFrames = 100;
+Common.NumWorkers = 1;
+Common.isRealTimeLogCWin = 1;
+Common.isRealTimeLogFile = 0;
