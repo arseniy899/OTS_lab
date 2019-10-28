@@ -6,10 +6,10 @@ function DrawBERAndFER(DirName)
         if nargin == 0
             DirName = 'Results';
 		end
-		path = ['../out/' DirName];
+		path = ['out/' DirName];
     % Получим информацию о содержимом директории
-        Listing = dir(path);
-
+	    Listing = dir();
+		Listing.name
     % Инициализируем cell-массив для хранения имён файлов, из которых потом
     % сделаем легенду
         Names = cell(0);
@@ -18,10 +18,8 @@ function DrawBERAndFER(DirName)
         for k = 1:length(Listing)
             % Надо проверять, чтобы рассматриваемый элемент был файлом и
             % имел расширение mat
-			
                 if ~Listing(k).isdir
                     FName = Listing(k).name;
-					
                     if length(FName) > 4
                         if isequal(FName(end-3:end), '.mat')
                             % Добавим имя файла к списку
@@ -47,7 +45,7 @@ function DrawBERAndFER(DirName)
         % Цикл по всем уже известным файлам
             for k = 1:length(Names)
                 % Загрузка результатов
-                    load([path, '\', Names{k}, '.mat'], 'Res');
+                    load([DirName, '\', Names{k}, '.mat'], 'Res');
                 % Прорисовка без затирания старых рисунков    
                     figure(f{1});
                         hold on;

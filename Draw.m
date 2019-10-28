@@ -1,4 +1,4 @@
-function DrawBERAndFER(DirName)
+function Draw(DirName)
 %
 % Функция прорисовки кривых вероятности битовой и кадровой ошибок
 
@@ -6,10 +6,9 @@ function DrawBERAndFER(DirName)
         if nargin == 0
             DirName = 'Results';
 		end
-		path = ['../out/' DirName];
+		path = ['out/' DirName];
     % Получим информацию о содержимом директории
-        Listing = dir(path);
-
+	    Listing = dir(path);
     % Инициализируем cell-массив для хранения имён файлов, из которых потом
     % сделаем легенду
         Names = cell(0);
@@ -18,10 +17,8 @@ function DrawBERAndFER(DirName)
         for k = 1:length(Listing)
             % Надо проверять, чтобы рассматриваемый элемент был файлом и
             % имел расширение mat
-			
                 if ~Listing(k).isdir
                     FName = Listing(k).name;
-					
                     if length(FName) > 4
                         if isequal(FName(end-3:end), '.mat')
                             % Добавим имя файла к списку
