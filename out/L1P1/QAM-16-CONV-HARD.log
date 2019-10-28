@@ -1,0 +1,20 @@
+28-Oct-2019 18:23:39 Start of calculation the curve QAM-16-CONV-HARD (2 of 2).
+28-Oct-2019 18:23:39   Start of the main calculations.
+28-Oct-2019 18:23:40     h2 =  0.00 dB; h2Step =  0.10 dB; BER = 0.32659375 =      31353/     96000; FER =     100/    100 Completed
+28-Oct-2019 18:23:40     h2 =  0.10 dB; h2Step =  0.10 dB; BER = 0.31409375 =      30153/     96000; FER =     100/    100 Completed
+28-Oct-2019 18:23:41     h2 =  0.30 dB; h2Step =  0.20 dB; BER = 0.29011458 =      27851/     96000; FER =     100/    100 Completed
+28-Oct-2019 18:23:41     h2 =  0.70 dB; h2Step =  0.40 dB; BER = 0.24654167 =      23668/     96000; FER =     100/    100 Completed
+28-Oct-2019 18:23:42     h2 =  1.50 dB; h2Step =  0.80 dB; BER = 0.15053125 =      14451/     96000; FER =     100/    100 Completed
+28-Oct-2019 18:23:42     h2 =  2.50 dB; h2Step =  1.00 dB; BER = 0.05347917 =      10268/    192000; FER =     199/    200 Completed
+28-Oct-2019 18:23:43     h2 =  3.50 dB; h2Step =  1.00 dB; BER = 0.01297917 =       2492/    192000; FER =     173/    200 Completed
+28-Oct-2019 18:23:44     h2 =  4.50 dB; h2Step =  1.00 dB; BER = 0.00234375 =        675/    288000; FER =     103/    300 Completed
+28-Oct-2019 18:23:46     h2 =  5.00 dB; h2Step =  0.50 dB; BER = 0.00103125 =        594/    576000; FER =     121/    600 Completed
+28-Oct-2019 18:23:51     h2 =  5.50 dB; h2Step =  0.50 dB; BER = 0.00037361 =        538/   1440000; FER =     165/   1500 Completed
+28-Oct-2019 18:24:00     h2 =  6.00 dB; h2Step =  0.50 dB; BER = 0.00019329 =        501/   2592000; FER =     183/   2700 Completed
+28-Oct-2019 18:24:30     h2 =  7.00 dB; h2Step =  1.00 dB; BER = 0.00005735 =        501/   8736000; FER =     254/   9100 Completed
+28-Oct-2019 18:24:30   The main calculations are completed.
+28-Oct-2019 18:24:30   Start of the additional calculations [4.00].
+28-Oct-2019 18:24:31     h2 =  4.00 dB; h2Step =   NaN dB; BER = 0.00568750 =       1092/    192000; FER =     110/    200 Completed
+28-Oct-2019 18:24:31   The additional calculations are completed.
+28-Oct-2019 18:24:31 Calculations are completed.
+

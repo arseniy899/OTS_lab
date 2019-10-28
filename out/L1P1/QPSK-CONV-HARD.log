@@ -1,0 +1,4 @@
+28-Oct-2019 19:13:39 Start of calculation the curve QPSK-CONV-HARD (1 of 2).
+28-Oct-2019 19:13:39   Start of the main calculations.
+28-Oct-2019 19:13:40     h2 =  0.00 dB; h2Step =  0.10 dB; BER = 0.03252083 =       6244/    192000; FER =     198/    200 Completed
+28-Oct-2019 19:13:41     h2 =  0.10 dB; h2Step =  0.10 dB; BER = 0.02758333 =       5296/    192000; FER =     195/    200 Completed
