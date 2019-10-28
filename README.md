@@ -18,3 +18,10 @@ By default, output data is stored within `out` directory. To view them - type
 ```
 >> Draw('<Results Name>')
 ```
+## TODO
+[x] Convolutional encoding
+[ ] LDPC
+[ ] DVB-S2
+[ ] RRC-filter
+[ ] Signal synchronisation with small error
+[ ] VCDMA
