@@ -52,14 +52,18 @@ function Draw(DirName)
                         plot(Res.h2dBs, Res.NumErBits ./ Res.NumTrBits, ...
                             'LineWidth', 1, 'MarkerSize', 8, ...
                             'Marker', '.');
+							
+					%Save figure
+					
                     figure(f{2});
                         hold on;
 						set(gcf,'color','w');
                         plot(Res.h2dBs, Res.NumErFrames ./ ...
                             Res.NumTrFrames, 'LineWidth', 1, ...
                             'MarkerSize', 8, 'Marker', '.');
+					
             end
-
+			
         for k = 1:2
             figure(f{k});
 
@@ -98,4 +102,12 @@ function Draw(DirName)
                 else
                     legend(Names, 'Interpreter', 'none');
                 end
+			% save to image
+				if k == 1
+                    saveas(gcf,[path '/BER'],'png');
+                else
+                    saveas(gcf,[path '/FER'],'png');
+                end
+			
         end
+		
