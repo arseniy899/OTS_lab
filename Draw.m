@@ -7,6 +7,9 @@ function Draw(DirName)
             DirName = 'Results';
 		end
 		path = ['out/' DirName];
+		
+		drawIdealFER = false;
+		
     % Получим информацию о содержимом директории
 	    Listing = dir(path);
     % Инициализируем cell-массив для хранения имён файлов, из которых потом
@@ -49,6 +52,8 @@ function Draw(DirName)
                     figure(f{1});
                         hold on;
 						set(gcf,'color','w');
+						set(gcf);
+						set(gcf, 'Units', 'Normalized', 'OuterPosition', [0 0 1 1]);
                         plot(Res.h2dBs, Res.NumErBits ./ Res.NumTrBits, ...
                             'LineWidth', 1, 'MarkerSize', 8, ...
                             'Marker', '.');
@@ -58,6 +63,7 @@ function Draw(DirName)
                     figure(f{2});
                         hold on;
 						set(gcf,'color','w');
+						set(gcf, 'Units', 'Normalized', 'OuterPosition', [0 0 1 1]);
                         plot(Res.h2dBs, Res.NumErFrames ./ ...
                             Res.NumTrFrames, 'LineWidth', 1, ...
                             'MarkerSize', 8, 'Marker', '.');
@@ -83,7 +89,9 @@ function Draw(DirName)
 
             % Прорисовка стандартных BER
             % В данном случае для QAM4 и QAM16 до вероятности 1e-6
-                if k == 1
+			if(drawIdealFER)
+                
+				if k == 1
                     AddNames = cell(0);
                     h2dB = 0:0.1:10.5;
                     BER = berawgn(h2dB, 'qam', 4);
@@ -95,18 +103,18 @@ function Draw(DirName)
                     plot(h2dB, BER);
                     AddNames{end+1} = '16-QAM'; %#ok<AGROW>
                 end
-
+			end
             % Добавим легенду
-                if k == 1
+                if k == 1 && drawIdealFER
                     legend([Names, AddNames], 'Interpreter', 'none');
                 else
                     legend(Names, 'Interpreter', 'none');
                 end
 			% save to image
 				if k == 1
-                    saveas(gcf,[path '/BER'],'png');
+                    saveas(gcf,[path '-BER'],'png');
                 else
-                    saveas(gcf,[path '/FER'],'png');
+                    saveas(gcf,[path '-FER'],'png');
                 end
 			
         end

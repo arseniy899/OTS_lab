@@ -98,12 +98,16 @@ classdef ClassMapper < handle
             if obj.isTransparent
                 OutData = InData;
                 return
-            end
-            
-            if ~(strcmp(obj.DecisionMethod, 'Hard decision'))
-                set(obj.DeMapper, 'Variance', InstChannelParams.Variance);
-            end
-            OutData = obj.DeMapper.step(InData);
+			end
+			if (strcmp(obj.Type, 'APSK'))
+				OutData = dvbsapskdemod(InData,obj.ModulationOrder, 's2',...
+                'OutputType','bit');
+			else
+				if ~(strcmp(obj.DecisionMethod, 'Hard decision'))
+					set(obj.DeMapper, 'Variance', InstChannelParams.Variance);
+				end
+				OutData = obj.DeMapper.step(InData);
+			end
         end
     end
 end

@@ -1,0 +1,22 @@
+07-Nov-2019 22:17:17 Start of calculation the curve QPSK-LDPC-NOinter-LLR (2 of 3).
+07-Nov-2019 22:17:17   Start of the main calculations.
+07-Nov-2019 22:18:30     h2 = -5.000 dB; h2Step =  0.100 dB; BER = 0.20804 =   674044/ 3240000; FER =   100/  100 Completed
+07-Nov-2019 22:19:43     h2 = -4.900 dB; h2Step =  0.100 dB; BER = 0.20492 =   663933/ 3240000; FER =   100/  100 Completed
+07-Nov-2019 22:21:01     h2 = -4.700 dB; h2Step =  0.200 dB; BER = 0.19857 =   643379/ 3240000; FER =   100/  100 Completed
+07-Nov-2019 22:22:22     h2 = -4.300 dB; h2Step =  0.400 dB; BER = 0.18507 =   599615/ 3240000; FER =   100/  100 Completed
+07-Nov-2019 22:23:36     h2 = -3.500 dB; h2Step =  0.800 dB; BER = 0.15391 =   498673/ 3240000; FER =   100/  100 Completed
+07-Nov-2019 22:25:02     h2 = -2.500 dB; h2Step =  1.000 dB; BER = 0.09210 =   298408/ 3240000; FER =   100/  100 Completed
+07-Nov-2019 22:56:24     h2 = -1.500 dB; h2Step =  1.000 dB; BER = 0.00000 =        0/100440000; FER =     0/ 3100 Completed (complexity exceeded)
+07-Nov-2019 22:56:24   The main calculations are completed.
+07-Nov-2019 22:56:24   Start of the additional calculations [-2.000].
+07-Nov-2019 23:39:25     h2 = -2.000 dB; h2Step =    NaN dB; BER = 0.00000 =        0/100440000; FER =     0/ 3100 Completed (complexity exceeded)
+07-Nov-2019 23:39:25     1 results are deleted from main calculations and 0 values of h2 are deleted from the set for additional calculations .
+07-Nov-2019 23:39:25   Start of the additional calculations [-2.250].
+07-Nov-2019 23:42:25     h2 = -2.250 dB; h2Step =    NaN dB; BER = 0.00711 =    46101/ 6480000; FER =   100/  200 Completed
+07-Nov-2019 23:42:25   Start of the additional calculations [-2.375 -2.125].
+07-Nov-2019 23:43:45     h2 = -2.375 dB; h2Step =    NaN dB; BER = 0.06777 =   219571/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:22:50     h2 = -2.125 dB; h2Step =    NaN dB; BER = 0.00000 =      163/100440000; FER =    13/ 3100 Completed (complexity exceeded)
+08-Nov-2019 00:22:50     1 results are deleted from main calculations and 0 values of h2 are deleted from the set for additional calculations .
+08-Nov-2019 00:22:50   The additional calculations are completed.
+08-Nov-2019 00:22:50 Calculations are completed.
+

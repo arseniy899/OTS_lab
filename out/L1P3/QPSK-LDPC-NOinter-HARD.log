@@ -1,0 +1,20 @@
+08-Nov-2019 00:22:51 Start of calculation the curve QPSK-LDPC-NOinter-HARD (3 of 3).
+08-Nov-2019 00:22:51   Start of the main calculations.
+08-Nov-2019 00:23:54     h2 = -5.000 dB; h2Step =  0.100 dB; BER = 0.21314 =   690564/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:24:47     h2 = -4.900 dB; h2Step =  0.100 dB; BER = 0.21045 =   681851/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:25:40     h2 = -4.700 dB; h2Step =  0.200 dB; BER = 0.20514 =   664648/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:26:35     h2 = -4.300 dB; h2Step =  0.400 dB; BER = 0.19430 =   629546/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:27:29     h2 = -3.500 dB; h2Step =  0.800 dB; BER = 0.17231 =   558286/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:28:19     h2 = -2.500 dB; h2Step =  1.000 dB; BER = 0.14460 =   468493/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:29:10     h2 = -1.500 dB; h2Step =  1.000 dB; BER = 0.11702 =   379153/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:30:05     h2 = -0.500 dB; h2Step =  1.000 dB; BER = 0.09095 =   294694/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:30:58     h2 =  0.500 dB; h2Step =  1.000 dB; BER = 0.06702 =   217139/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:31:50     h2 =  1.500 dB; h2Step =  1.000 dB; BER = 0.04638 =   150272/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:32:42     h2 =  2.500 dB; h2Step =  1.000 dB; BER = 0.02962 =    95974/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:33:36     h2 =  3.500 dB; h2Step =  1.000 dB; BER = 0.01716 =    55589/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:34:28     h2 =  4.500 dB; h2Step =  1.000 dB; BER = 0.00883 =    28607/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:35:24     h2 =  5.500 dB; h2Step =  1.000 dB; BER = 0.00387 =    12534/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:36:16     h2 =  6.500 dB; h2Step =  1.000 dB; BER = 0.00141 =     4553/ 3240000; FER =   100/  100 Completed
+08-Nov-2019 00:36:16   The main calculations are completed. (Maximum SNR is exceeded)
+08-Nov-2019 00:36:16 Calculations are completed.
+

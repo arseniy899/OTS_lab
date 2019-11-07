@@ -68,7 +68,9 @@ function Encoder = SetParamsEncoder(inEncoder, ParamsNumber, ...
         else
             if ~(strcmp(Encoder.Type, 'conv') || ...
 				 strcmp(Encoder.Type, 'conv-soft')|| ...
+				 strcmp(Encoder.Type, 'LDPC-soft')|| ...
 				 strcmp(Encoder.Type, 'LDPC')	)
+			 
                 if strcmp(LogLanguage, 'Russian')
                     error('Недопустимое значение Encoder.Type');
                 else
@@ -77,7 +79,7 @@ function Encoder = SetParamsEncoder(inEncoder, ParamsNumber, ...
             end
 		end
 		if ~isfield(Encoder, 'rateLDPC')
-			Encoder.rateLDPC = dvbs2ldpc(3/5);
+			Encoder.rateLDPC = dvbs2ldpc(1/2);
 		end
 		if ~isfield(Encoder, 'TbLen')
 			Encoder.TbLen = 34;
@@ -103,11 +105,15 @@ function Interleaver = SetParamsInterleaver(inInterleaver, ...
         if ~isfield(Interleaver, 'isTransparent')
             Interleaver.isTransparent = true;
         else
-            % Проверка корректности введённых значений
-		end
-		if ~isfield(Interleaver, 'order')
-			Interleaver.order = randperm(32400)';
-		end
+            if ~isfield(Interleaver, 'RowsReadingSequence')
+				Interleaver.RowsReadingSequence = 'none';
+			end;
+		
+			if ~isfield(Interleaver, 'order')
+				Interleaver.order = randperm(32400)';
+			end
+		end;
+		
 		
 end
 function Mapper = SetParamsMapper(inMapper, ParamsNumber, ...
@@ -128,7 +134,8 @@ function Mapper = SetParamsMapper(inMapper, ParamsNumber, ...
             Mapper.Type = 'QAM';
         else
             if ~(strcmp(Mapper.Type, 'QAM') || ...
-                    strcmp(Mapper.Type, 'PSK'))
+                    strcmp(Mapper.Type, 'PSK')|| ...
+                    strcmp(Mapper.Type, 'APSK'))
                 if strcmp(LogLanguage, 'Russian')
                     error('Недопустимое значение Mapper.Type');
                 else

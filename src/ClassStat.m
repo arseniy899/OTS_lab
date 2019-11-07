@@ -23,8 +23,7 @@ classdef ClassStat < handle
                 obj.NumTrBits   = obj.NumTrBits   + ...
                     length(Frame.TxData);
                 obj.NumTrFrames = obj.NumTrFrames + 1;
-				
-                Buf = sum(Frame.TxData ~= Frame.RxData);
+				Buf = sum(Frame.TxData ~= Frame.RxData);
                 obj.NumErBits   = obj.NumErBits   + Buf;
                 obj.NumErFrames = obj.NumErFrames + sign(Buf);
         end
