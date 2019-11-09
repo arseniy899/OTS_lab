@@ -8,10 +8,10 @@ function Draw(DirName, varargin)
 		end
 		path = ['out/' DirName];
 		
-		drawIdealFER = true;
-		tmp = strcmpi(varargin,'drawIdealFER'); 
+		drawIdealBER = true;
+		tmp = strcmpi(varargin,'drawIdealBER'); 
 		if any(tmp)
-			drawIdealFER = varargin{find(tmp)+1}; 
+			drawIdealBER = varargin{find(tmp)+1}; 
 			tmp(find(tmp)+1)=1; 
 			varargin = varargin(~tmp); 
 		end
@@ -124,7 +124,7 @@ function Draw(DirName, varargin)
             % Прорисовка стандартных BER
             % В данном случае для QAM4 и QAM16 до вероятности 1e-6
 			xbounds = xlim;
-			if(drawIdealFER)
+			if(drawIdealBER)
                 
 				if k == 1
                     AddNames = cell(0);
@@ -148,7 +148,7 @@ function Draw(DirName, varargin)
 							plotWPercent plotHPercent]);
 				
             % Добавим легенду
-                if k == 1 && drawIdealFER
+                if k == 1 && drawIdealBER
                     legend([Names, AddNames], 'Interpreter', 'none');
                 else
                     legend(Names, 'Interpreter', 'none');
