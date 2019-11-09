@@ -1,20 +1,21 @@
-28-Oct-2019 18:23:39 Start of calculation the curve QAM-16-CONV-HARD (2 of 2).
-28-Oct-2019 18:23:39   Start of the main calculations.
-28-Oct-2019 18:23:40     h2 =  0.00 dB; h2Step =  0.10 dB; BER = 0.32659375 =      31353/     96000; FER =     100/    100 Completed
-28-Oct-2019 18:23:40     h2 =  0.10 dB; h2Step =  0.10 dB; BER = 0.31409375 =      30153/     96000; FER =     100/    100 Completed
-28-Oct-2019 18:23:41     h2 =  0.30 dB; h2Step =  0.20 dB; BER = 0.29011458 =      27851/     96000; FER =     100/    100 Completed
-28-Oct-2019 18:23:41     h2 =  0.70 dB; h2Step =  0.40 dB; BER = 0.24654167 =      23668/     96000; FER =     100/    100 Completed
-28-Oct-2019 18:23:42     h2 =  1.50 dB; h2Step =  0.80 dB; BER = 0.15053125 =      14451/     96000; FER =     100/    100 Completed
-28-Oct-2019 18:23:42     h2 =  2.50 dB; h2Step =  1.00 dB; BER = 0.05347917 =      10268/    192000; FER =     199/    200 Completed
-28-Oct-2019 18:23:43     h2 =  3.50 dB; h2Step =  1.00 dB; BER = 0.01297917 =       2492/    192000; FER =     173/    200 Completed
-28-Oct-2019 18:23:44     h2 =  4.50 dB; h2Step =  1.00 dB; BER = 0.00234375 =        675/    288000; FER =     103/    300 Completed
-28-Oct-2019 18:23:46     h2 =  5.00 dB; h2Step =  0.50 dB; BER = 0.00103125 =        594/    576000; FER =     121/    600 Completed
-28-Oct-2019 18:23:51     h2 =  5.50 dB; h2Step =  0.50 dB; BER = 0.00037361 =        538/   1440000; FER =     165/   1500 Completed
-28-Oct-2019 18:24:00     h2 =  6.00 dB; h2Step =  0.50 dB; BER = 0.00019329 =        501/   2592000; FER =     183/   2700 Completed
-28-Oct-2019 18:24:30     h2 =  7.00 dB; h2Step =  1.00 dB; BER = 0.00005735 =        501/   8736000; FER =     254/   9100 Completed
-28-Oct-2019 18:24:30   The main calculations are completed.
-28-Oct-2019 18:24:30   Start of the additional calculations [4.00].
-28-Oct-2019 18:24:31     h2 =  4.00 dB; h2Step =   NaN dB; BER = 0.00568750 =       1092/    192000; FER =     110/    200 Completed
-28-Oct-2019 18:24:31   The additional calculations are completed.
-28-Oct-2019 18:24:31 Calculations are completed.
+08-Nov-2019 17:14:56 Start of calculation the curve QAM-16-CONV-HARD (2 of 6).
+08-Nov-2019 17:14:56   Start of the main calculations.
+08-Nov-2019 17:14:58     h2 =  0.00 dB; h2Step =  0.10 dB; BER = 0.33128125 =      31803/     96000; FER =     100/    100 Completed
+08-Nov-2019 17:14:59     h2 =  0.10 dB; h2Step =  0.10 dB; BER = 0.31736458 =      30467/     96000; FER =     100/    100 Completed
+08-Nov-2019 17:15:00     h2 =  0.30 dB; h2Step =  0.20 dB; BER = 0.29341667 =      28168/     96000; FER =     100/    100 Completed
+08-Nov-2019 17:15:01     h2 =  0.70 dB; h2Step =  0.40 dB; BER = 0.24381250 =      23406/     96000; FER =     100/    100 Completed
+08-Nov-2019 17:15:02     h2 =  1.50 dB; h2Step =  0.80 dB; BER = 0.14123958 =      13559/     96000; FER =     100/    100 Completed
+08-Nov-2019 17:15:03     h2 =  2.50 dB; h2Step =  1.00 dB; BER = 0.05094792 =       4891/     96000; FER =     100/    100 Completed
+08-Nov-2019 17:15:05     h2 =  3.50 dB; h2Step =  1.00 dB; BER = 0.01327083 =       2548/    192000; FER =     160/    200 Completed
+08-Nov-2019 17:15:07     h2 =  4.50 dB; h2Step =  1.00 dB; BER = 0.00253125 =        729/    288000; FER =     112/    300 Completed
+08-Nov-2019 17:15:11     h2 =  5.00 dB; h2Step =  0.50 dB; BER = 0.00125625 =        603/    480000; FER =     116/    500 Completed
+08-Nov-2019 17:15:21     h2 =  5.50 dB; h2Step =  0.50 dB; BER = 0.00044878 =        517/   1152000; FER =     138/   1200 Completed
+08-Nov-2019 17:15:41     h2 =  6.00 dB; h2Step =  0.50 dB; BER = 0.00019754 =        531/   2688000; FER =     173/   2800 Completed
+08-Nov-2019 17:16:21     h2 =  6.50 dB; h2Step =  0.50 dB; BER = 0.00010236 =        511/   4992000; FER =     205/   5200 Completed
+08-Nov-2019 17:18:29     h2 =  7.50 dB; h2Step =  1.00 dB; BER = 0.00003157 =        500/  15840000; FER =     291/  16500 Completed
+08-Nov-2019 17:18:29   The main calculations are completed.
+08-Nov-2019 17:18:29   Start of the additional calculations [4.00].
+08-Nov-2019 17:18:31     h2 =  4.00 dB; h2Step =   NaN dB; BER = 0.00591146 =       1135/    192000; FER =     125/    200 Completed
+08-Nov-2019 17:18:31   The additional calculations are completed.
+08-Nov-2019 17:18:31 Calculations are completed.
 
