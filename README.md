@@ -23,7 +23,6 @@ Draw('<Results Name>', 'drawIdealBER', true))
 ## TODO
 - [x] Convolutional encoding
 - [x] LDPC
-- [-] DVB-S2
 - [ ] RRC-filter
 - [ ] Signal synchronisation with small error
 - [ ] VCDMA
