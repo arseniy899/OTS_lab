@@ -17,11 +17,13 @@ Wait some time and you will see finish message.
 By default, output data is stored within `out` directory. To view them - type 
 ```
 >> Draw('<Results Name>')
+% or to Ideal Frame Error Rate for QAM-16 and QPKS
+Draw('<Results Name>', 'drawIdealBER', true))
 ```
 ## TODO
 - [x] Convolutional encoding
-- [ ] LDPC
-- [ ] DVB-S2
+- [x] LDPC
+- [-] DVB-S2
 - [ ] RRC-filter
 - [ ] Signal synchronisation with small error
 - [ ] VCDMA
