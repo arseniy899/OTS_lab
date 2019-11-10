@@ -16,6 +16,14 @@ function Draw(DirName, varargin)
 			varargin = varargin(~tmp); 
 		end
 		
+		exportExts = {};
+		tmp = strcmpi(varargin,'exportExts'); 
+		if any(tmp)
+			exportExts = varargin{find(tmp)+1}; 
+			tmp(find(tmp)+1)=1; 
+			varargin = varargin(~tmp); 
+		end
+		
 		plotHPercent = 0.90;
 		plotWPercent = 0.95;
 		figSizePercent = 0.9;
@@ -155,14 +163,14 @@ function Draw(DirName, varargin)
 				end;
 				
 			% save to image
-				if k == 1
-                    saveas(gcf,[path '-BER'],'png');
-					saveas(gcf,[path '-BER'],'svg');
-                else
-                    saveas(gcf,[path '-FER'],'png');
-					saveas(gcf,[path '-FER'],'svg');
-				end;
+			for extNum = 1:length(exportExts)
 			
+				if k == 1
+                    saveas(gcf,[path '-BER'],char(exportExts(extNum)));
+				else
+					saveas(gcf,[path '-FER'],char(exportExts(extNum)));
+				end;
+			end;
 		end;
 end
 function [htext] = PlotLabel(h,textString,varargin)
@@ -320,8 +328,8 @@ switch lower(location)
 		xi = xIndex;
 		x = xdata(xIndex); 
 		y = ydata(xIndex);
-		
-		if(xIndex > int8(length(xdata)*0.7))
+		xbounds = xlim;
+		if(x > (xbounds(1)+xbounds(2))*0.5)
 			horizontalAlignment = 'right'; 
 		end;
 		if(y > max(ydata)*0.999)
