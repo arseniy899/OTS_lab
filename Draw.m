@@ -2,9 +2,9 @@ function Draw(DirName, varargin)
 %
 % Функция прорисовки кривых вероятности битовой и кадровой ошибок
 	close all
-    % Директория, из которой будут взяты результаты
-        if nargin == 0
-            DirName = 'Results';
+	% Директория, из которой будут взяты результаты
+		if nargin == 0
+			DirName = 'Results';
 		end
 		path = ['out/' DirName];
 		
@@ -31,49 +31,49 @@ function Draw(DirName, varargin)
 		if any(tmp)
 			figSizePercent = varargin{find(tmp)+1}; 
 		end
-    % Получим информацию о содержимом директории
-	    Listing = dir(path);
-    % Инициализируем cell-массив для хранения имён файлов, из которых потом
-    % сделаем легенду
-        Names = cell(0);
+	% Получим информацию о содержимом директории
+		Listing = dir(path);
+	% Инициализируем cell-массив для хранения имён файлов, из которых потом
+	% сделаем легенду
+		Names = cell(0);
 
-    % Цикл по всем файлам директории
-        for k = 1:length(Listing)
-            % Надо проверять, чтобы рассматриваемый элемент был файлом и
-            % имел расширение mat
-                if ~Listing(k).isdir
-                    FName = Listing(k).name;
-                    if length(FName) > 4
-                        if isequal(FName(end-3:end), '.mat')
-                            % Добавим имя файла к списку
-                                Names{end+1} = FName(1:end-4); %#ok<AGROW>
-                        end
-                    end
-                end
-        end
+	% Цикл по всем файлам директории
+		for k = 1:length(Listing)
+			% Надо проверять, чтобы рассматриваемый элемент был файлом и
+			% имел расширение mat
+				if ~Listing(k).isdir
+					FName = Listing(k).name;
+					if length(FName) > 4
+						if isequal(FName(end-3:end), '.mat')
+							% Добавим имя файла к списку
+								Names{end+1} = FName(1:end-4); %#ok<AGROW>
+						end
+					end
+				end
+		end
 
-        if isempty(Names)
-            error('Не найдены файлы с результатами!');
-        end
+		if isempty(Names)
+			error('Не найдены файлы с результатами!');
+		end
 
-    % Прорисовка BER и FER
-        % Создадим два полотна и оси
-            f  = cell(2, 1);
-            ax = cell(2, 1);
-            for k = 1:2
-                f{k} = figure;
+	% Прорисовка BER и FER
+		% Создадим два полотна и оси
+			f  = cell(2, 1);
+			ax = cell(2, 1);
+			for k = 1:2
+				f{k} = figure;
 				ax{k} = axes;
 			end;
 			fprintf('PROB\tNAME\t\t\t\t\t\tSNR\n')
-        % Цикл по всем уже известным файлам
+		% Цикл по всем уже известным файлам
 			angle = 360;
-            for k = 1:length(Names)
-                % Загрузка результатов
-                    load([path, '\', Names{k}, '.mat'], 'Res');
+			for k = 1:length(Names)
+				% Загрузка результатов
+					load([path, '\', Names{k}, '.mat'], 'Res');
 					
-                % Прорисовка без затирания старых рисунков    
-                    figure(f{1});
-					    hold on;
+				% Прорисовка без затирания старых рисунков	
+					figure(f{1});
+						hold on;
 						set(gcf,'color','w');
 						
 						set(gcf, 'Units', 'Normalized', 'OuterPosition',...
@@ -81,8 +81,8 @@ function Draw(DirName, varargin)
 							figSizePercent figSizePercent]);
 						
 						h = plot(Res.h2dBs, Res.NumErBits ./ Res.NumTrBits, ...
-                            'LineWidth', 1, 'MarkerSize', 8, ...
-                            'Marker', '.');
+							'LineWidth', 1, 'MarkerSize', 8, ...
+							'Marker', '.');
 						PlotLabel(h,['   ' Names{k} '   '],...
 							'location','random', 'xIndex',...
 							k/length(Names) *length(Res.h2dBs) );
@@ -101,72 +101,72 @@ function Draw(DirName, varargin)
 						end;
 					end
 						
-                    figure(f{2});
-                        hold on;
+					figure(f{2});
+						hold on;
 						set(gcf,'color','w');
 						set(gcf, 'Units', 'Normalized', 'OuterPosition',...
 							[(1-figSizePercent)/2 (1-figSizePercent)/2 ...
 							figSizePercent figSizePercent]);
-                        h = plot(Res.h2dBs, Res.NumErFrames ./ ...
-                            Res.NumTrFrames, 'LineWidth', 1, ...
-                            'MarkerSize', 8, 'Marker', '.');
+						h = plot(Res.h2dBs, Res.NumErFrames ./ ...
+							Res.NumTrFrames, 'LineWidth', 1, ...
+							'MarkerSize', 8, 'Marker', '.');
 						PlotLabel(h,['   ' Names{k} '   '],...
 							'location','random', 'xIndex',...
 							k/length(Names) *length(Res.h2dBs) );
-            end
+			end
 			
-        for k = 1:2
-            figure(f{k});
+		for k = 1:2
+			figure(f{k});
 
-            % Добавим сетку
-                grid on;
-           		
-            % Подпишем рисунок и ось абсцисс
-                if k == 1
-                    title('BER');
-                else
-                    title('FER');
-                end
-                xlabel('{\ith}^2 (dB)');
+			% Добавим сетку
+				grid on;
+		   		
+			% Подпишем рисунок и ось абсцисс
+				if k == 1
+					title('BER');
+				else
+					title('FER');
+				end
+				xlabel('{\ith}^2 (dB)');
 
-            % Прорисовка стандартных BER
-            % В данном случае для QAM4 и QAM16 до вероятности 1e-6
+			% Прорисовка стандартных BER
+			% В данном случае для QAM4 и QAM16 до вероятности 1e-6
 			xbounds = xlim;
 			if(drawIdealBER)
-                
+				
 				if k == 1
-                    AddNames = cell(0);
-                    h2dB = xbounds(1):0.1:10.5;
-                    BER = berawgn(h2dB, 'qam', 4);
-                    h = plot(h2dB, BER);
-                    AddNames{end+1} = 'QPSK'; %#ok<AGROW>
+					AddNames = cell(0);
+					h2dB = xbounds(1):0.1:10.5;
+					BER = berawgn(h2dB, 'qam', 4);
+					h = plot(h2dB, BER);
+					AddNames{end+1} = 'QPSK'; %#ok<AGROW>
 					PlotLabel(h,'QPSK','location','right')
-                    h2dB = xbounds(1):0.1:14.4;
-                    BER = berawgn(h2dB, 'qam', 16);
-                    h = plot(h2dB, BER);
-                    AddNames{end+1} = '16-QAM'; %#ok<AGROW>
+					h2dB = xbounds(1):0.1:14.4;
+					BER = berawgn(h2dB, 'qam', 16);
+					h = plot(h2dB, BER);
+					AddNames{end+1} = '16-QAM'; %#ok<AGROW>
 					PlotLabel(h,'16-QAM','location','right')
 				end;
 			end
 			 % Сделаем традиционный масштаб по оси ординат
 				set(ax{k},'YScale', 'log');
-%                 set(ax{k},'XTick',xbounds(1):xbounds(2), 'YScale', 'log');
+%				 set(ax{k},'XTick',xbounds(1):xbounds(2), 'YScale', 'log');
 				set(ax{k},'Position',[(1-plotWPercent)/2 ...
 							(1-plotHPercent)/2 ...
 							plotWPercent plotHPercent]);
 				
-            % Добавим легенду
-                if k == 1 && drawIdealBER
-                    legend([Names, AddNames], 'Interpreter', 'none');
-                else
-                    legend(Names, 'Interpreter', 'none');
+			% Добавим легенду
+				if k == 1 && drawIdealBER
+					legend([Names, AddNames], 'Interpreter', 'none');
+				else
+					legend(Names, 'Interpreter', 'none');
 				end;
 				
 			% save to image
 			for extNum = 1:length(exportExts)
 			
 				if k == 1
-                    saveas(gcf,[path '-BER'],char(exportExts(extNum)));
+					saveas(gcf,[path '-BER'],char(exportExts(extNum)));
 				else
 					saveas(gcf,[path '-FER'],char(exportExts(extNum)));
 				end;
@@ -238,9 +238,9 @@ gcay = get(gca,'ylim');
 
 tmp = strncmpi(varargin,'loc',3); 
 if any(tmp)
-    location = varargin{find(tmp)+1}; 
-    tmp(find(tmp)+1)=1; 
-    varargin = varargin(~tmp); 
+	location = varargin{find(tmp)+1}; 
+	tmp(find(tmp)+1)=1; 
+	varargin = varargin(~tmp); 
 end
 %% 
 global lastAngle
@@ -248,33 +248,33 @@ angle = lastAngle - 25;
 angle = 360 - mod(angle,180);
 tmp = strncmpi(varargin,'angle',3); 
 if any(tmp)
-    angle = (varargin{find(tmp)+1});
-    tmp(find(tmp)+1)=1; 
-    varargin = varargin(~tmp); 
+	angle = (varargin{find(tmp)+1});
+	tmp(find(tmp)+1)=1; 
+	varargin = varargin(~tmp); 
 end
 
 xIndex = randi(length(xdata), 1);
 tmp = strncmpi(varargin,'xIndex',3); 
 if any(tmp)
-    xIndex = int8(varargin{find(tmp)+1});
-    tmp(find(tmp)+1)=1; 
-    varargin = varargin(~tmp); 
+	xIndex = int8(varargin{find(tmp)+1});
+	tmp(find(tmp)+1)=1; 
+	varargin = varargin(~tmp); 
 end
 tmp = strcmpi(varargin,'slope'); 
 if any(tmp) 
-    followSlope = true; 
-    varargin = varargin(~tmp); 
+	followSlope = true; 
+	varargin = varargin(~tmp); 
 end
 
 
 
 
 if followSlope
-    pbp = kearneyplotboxpos(gca); % A modified version of Kelly Kearney's plotboxpos function is included as a subfunction below.  
+	pbp = kearneyplotboxpos(gca); % A modified version of Kelly Kearney's plotboxpos function is included as a subfunction below.  
 
-    % slope is scaled because of axes and plot box may not be equal and square:
-    gcaf = pbp(4)/pbp(3); 
-    apparentTheta = atand(gcaf*gradient(ydata,xdata).*(gcax(2)-gcax(1))/(gcay(2)-gcay(1)));
+	% slope is scaled because of axes and plot box may not be equal and square:
+	gcaf = pbp(4)/pbp(3); 
+	apparentTheta = atand(gcaf*gradient(ydata,xdata).*(gcax(2)-gcax(1))/(gcay(2)-gcay(1)));
 
 end
 
@@ -282,48 +282,48 @@ end
 ind = find(xdata>=gcax(1)&xdata<=gcax(2)&ydata>=gcay(1)&ydata<=gcay(2)); 
 
 switch lower(location)
-    case {'left','west','leftmost','westmost'}
-        horizontalAlignment = 'left'; 
-        verticalAlignment = 'bottom'; 
-        x = min(xdata(ind));
-        y = ydata(xdata==x);
-        textString = [' ',textString]; 
-        xi = xdata==x; 
-        
-    case {'right','east','rightmost','eastmost'}
-        horizontalAlignment = 'right'; 
-        verticalAlignment = 'bottom'; 
-        x = max(xdata(ind)); 
-        y = ydata(xdata==x);
-        textString = [textString,' ']; 
-        xi = xdata==x(1); 
-        
-    case {'top','north','topmost','northmost'}
-        horizontalAlignment = 'left'; 
-        verticalAlignment = 'top'; 
-        y = max(ydata(ind));
-        x = xdata(ydata==y);
-        xi = xdata==x(1); 
-        
-    case {'bottom','south','southmost','bottommost'} 
-        horizontalAlignment = 'left'; 
-        verticalAlignment = 'bottom'; 
-        y = min(ydata(ind));
-        x = xdata(ydata==y);
-        xi = xdata==x(1); 
-        
-    case {'center','central','middle','centered','middlemost','centermost'}
-        horizontalAlignment = 'center'; 
-        verticalAlignment = 'bottom'; 
-        xi = round(mean(ind)); 
-        if ~ismember(xi,ind)
-            xi = find(ind<xi,1,'last'); 
-        end
-        x = xdata(xi); 
-        y = ydata(xi);
-    case {'random'}
+	case {'left','west','leftmost','westmost'}
 		horizontalAlignment = 'left'; 
-        verticalAlignment = 'bottom'; 
+		verticalAlignment = 'bottom'; 
+		x = min(xdata(ind));
+		y = ydata(xdata==x);
+		textString = [' ',textString]; 
+		xi = xdata==x; 
+		
+	case {'right','east','rightmost','eastmost'}
+		horizontalAlignment = 'right'; 
+		verticalAlignment = 'bottom'; 
+		x = max(xdata(ind)); 
+		y = ydata(xdata==x);
+		textString = [textString,' ']; 
+		xi = xdata==x(1); 
+		
+	case {'top','north','topmost','northmost'}
+		horizontalAlignment = 'left'; 
+		verticalAlignment = 'top'; 
+		y = max(ydata(ind));
+		x = xdata(ydata==y);
+		xi = xdata==x(1); 
+		
+	case {'bottom','south','southmost','bottommost'} 
+		horizontalAlignment = 'left'; 
+		verticalAlignment = 'bottom'; 
+		y = min(ydata(ind));
+		x = xdata(ydata==y);
+		xi = xdata==x(1); 
+		
+	case {'center','central','middle','centered','middlemost','centermost'}
+		horizontalAlignment = 'center'; 
+		verticalAlignment = 'bottom'; 
+		xi = round(mean(ind)); 
+		if ~ismember(xi,ind)
+			xi = find(ind<xi,1,'last'); 
+		end
+		x = xdata(xi); 
+		y = ydata(xi);
+	case {'random'}
+		horizontalAlignment = 'left'; 
+		verticalAlignment = 'bottom'; 
 		
 		xi = xIndex;
 		x = xdata(xIndex); 
@@ -341,22 +341,22 @@ end
  
 % Set rotation preferences: 
 if followSlope
-    theta = apparentTheta(xi); 
+	theta = apparentTheta(xi); 
 else
-    theta = 0; 
+	theta = 0; 
 end
  htext = text(x,y,textString,'color',color,'horizontalalignment',horizontalAlignment,...
-     'verticalalignment',verticalAlignment,'rotation',theta); 
+	 'verticalalignment',verticalAlignment,'rotation',theta); 
 % annotation('textarrow',[x(1) xSide],[y(1) ySide], 'Units','data','String',textString)
 % Add any user-defined preferences: 
 if length(varargin)>1 
-    set(htext,varargin{:});
+	set(htext,varargin{:});
 end
 
 
 % Clean up: 
 if nargout == 0
-    clear htext
+	clear htext
 end
 
 end
@@ -376,22 +376,22 @@ function pos = kearneyplotboxpos(h)
 %
 % Input variables:
 %
-%   h:      axis handle of a 2D axis (if ommitted, current axis is used).
+%   h:	  axis handle of a 2D axis (if ommitted, current axis is used).
 %
 % Output variables:
 %
-%   pos:    four-element position vector, in same units as h
+%   pos:	four-element position vector, in same units as h
 
 % Copyright 2010 Kelly Kearney
 
 % Check input
 
 if nargin < 1
-    h = gca;
+	h = gca;
 end
 
 if ~ishandle(h) || ~strcmp(get(h,'type'), 'axes')
-    error('Input must be an axis handle');
+	error('Input must be an axis handle');
 end
 
 % Get position of axis in pixels
@@ -403,49 +403,49 @@ set(h, 'Units', currunit);
 
 % Calculate box position based axis limits and aspect ratios
 
-darismanual  = strcmpi(get(h, 'DataAspectRatioMode'),    'manual');
+darismanual  = strcmpi(get(h, 'DataAspectRatioMode'),	'manual');
 pbarismanual = strcmpi(get(h, 'PlotBoxAspectRatioMode'), 'manual');
 
 if ~darismanual && ~pbarismanual
-    
-    pos = axisPos;
-    
+	
+	pos = axisPos;
+	
 else
 
-    dx = diff(get(h, 'XLim'));
-    dy = diff(get(h, 'YLim'));
-    dar = get(h, 'DataAspectRatio');
-    pbar = get(h, 'PlotBoxAspectRatio');
+	dx = diff(get(h, 'XLim'));
+	dy = diff(get(h, 'YLim'));
+	dar = get(h, 'DataAspectRatio');
+	pbar = get(h, 'PlotBoxAspectRatio');
 
-    limDarRatio = (dx/dar(1))/(dy/dar(2));
-    pbarRatio = pbar(1)/pbar(2);
-    axisRatio = axisPos(3)/axisPos(4);
+	limDarRatio = (dx/dar(1))/(dy/dar(2));
+	pbarRatio = pbar(1)/pbar(2);
+	axisRatio = axisPos(3)/axisPos(4);
 
-    if darismanual
-        if limDarRatio > axisRatio
-            pos(1) = axisPos(1);
-            pos(3) = axisPos(3);
-            pos(4) = axisPos(3)/limDarRatio;
-            pos(2) = (axisPos(4) - pos(4))/2 + axisPos(2);
-        else
-            pos(2) = axisPos(2);
-            pos(4) = axisPos(4);
-            pos(3) = axisPos(4) * limDarRatio;
-            pos(1) = (axisPos(3) - pos(3))/2 + axisPos(1);
-        end
-    elseif pbarismanual
-        if pbarRatio > axisRatio
-            pos(1) = axisPos(1);
-            pos(3) = axisPos(3);
-            pos(4) = axisPos(3)/pbarRatio;
-            pos(2) = (axisPos(4) - pos(4))/2 + axisPos(2);
-        else
-            pos(2) = axisPos(2);
-            pos(4) = axisPos(4);
-            pos(3) = axisPos(4) * pbarRatio;
-            pos(1) = (axisPos(3) - pos(3))/2 + axisPos(1);
-        end
-    end
+	if darismanual
+		if limDarRatio > axisRatio
+			pos(1) = axisPos(1);
+			pos(3) = axisPos(3);
+			pos(4) = axisPos(3)/limDarRatio;
+			pos(2) = (axisPos(4) - pos(4))/2 + axisPos(2);
+		else
+			pos(2) = axisPos(2);
+			pos(4) = axisPos(4);
+			pos(3) = axisPos(4) * limDarRatio;
+			pos(1) = (axisPos(3) - pos(3))/2 + axisPos(1);
+		end
+	elseif pbarismanual
+		if pbarRatio > axisRatio
+			pos(1) = axisPos(1);
+			pos(3) = axisPos(3);
+			pos(4) = axisPos(3)/pbarRatio;
+			pos(2) = (axisPos(4) - pos(4))/2 + axisPos(2);
+		else
+			pos(2) = axisPos(2);
+			pos(4) = axisPos(4);
+			pos(3) = axisPos(4) * pbarRatio;
+			pos(1) = (axisPos(3) - pos(3))/2 + axisPos(1);
+		end
+	end
 end
 
 % Convert plot box position to the units used by the axis
