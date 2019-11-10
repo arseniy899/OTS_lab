@@ -17,9 +17,13 @@ Wait some time and you will see finish message.
 By default, output data is stored within `out` directory. To view them - type 
 ```
 >> Draw('<Results Name>')
-% or to Ideal Frame Error Rate for QAM-16 and QPKS
+% or to draw Ideal Frame Error Rate for QAM-16 and QPKS
 Draw('<Results Name>', 'drawIdealBER', true))
+% or you can export images witg required extensions
+Draw('<Results Name>', 'drawIdealBER', true, 'exportExts',{'png', 'svg'}) % it will export your figures to PNG and SVG
 ```
+## Setup
+You can edit your main Setup file with [these available parameters](params_all.txt)
 ## TODO
 - [x] Convolutional encoding
 - [x] LDPC
