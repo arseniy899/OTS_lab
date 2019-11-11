@@ -4,7 +4,7 @@ function Draw(DirName, varargin)
 	close all
     % Директория, из которой будут взяты результаты
         if nargin == 0
-            DirName = 'Results';
+            DirName = 'L1P2';
 		end
 		path = ['out/' DirName];
 		
