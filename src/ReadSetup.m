@@ -18,71 +18,72 @@ function Params = ReadSetup(LogLanguage)
 %
 % Выходные параметры:
 %   Params - cell-массив с частичными наборами параметров, установленных
-%       согласно файлу(ам) Setup.
+%	   согласно файлу(ам) Setup.
 
-    % Инициализация результата
-        Params = cell(0);
+	% Инициализация результата
+		Params = cell(0);
 
-    % Учитываемые имена полей структуры Params верхнего уровня    
-        FieldNames = { ...
-            'Source', ...
-            'Encoder', ...
-            'Interleaver', ...
-            'Mapper', ...
-            'Sig', ...
-            'Channel', ...
-            'BER', ...
-            'Common' ...
-        };
+	% Учитываемые имена полей структуры Params верхнего уровня	
+		FieldNames = { ...
+			'Source', ...
+			'Encoder', ...
+			'Interleaver', ...
+			'RRCFilter',...
+			'Mapper', ...
+			'Sig', ...
+			'Channel', ...
+			'BER', ...
+			'Common' ...
+		};
    
-    % Поиск файлов
-        % Инициализация массива имён файлов
-            FileNames = cell(0);
+	% Поиск файлов
+		% Инициализация массива имён файлов
+			FileNames = cell(0);
 			path = '../';
-        % Определим содержимое рабочей директории
-            Listing = dir(path);
-        % Цикл по количеству элементов, содержащихся в директории
-            for k = 1:length(Listing)
-                % Рассматриваем только файлы
-                if ~Listing(k).isdir
-                    % Проверим, чтобы имя файла начиналось на Setup и имело
-                    % расширение 'm'
-                    if length(Listing(k).name) >= length('Setup.m')
-                        if strcmp(Listing(k).name(1:length('Setup')), ...
-                                'Setup') && strcmp(Listing(k).name( ...
-                                end-1:end), '.m')
-                            FileNames{end+1} = [path Listing(k).name]; %#ok<AGROW>
-                        end
-                    end
-                end
+		% Определим содержимое рабочей директории
+			Listing = dir(path);
+		% Цикл по количеству элементов, содержащихся в директории
+			for k = 1:length(Listing)
+				% Рассматриваем только файлы
+				if ~Listing(k).isdir
+					% Проверим, чтобы имя файла начиналось на Setup и имело
+					% расширение 'm'
+					if length(Listing(k).name) >= length('Setup.m')
+						if strcmp(Listing(k).name(1:length('Setup')), ...
+								'Setup') && strcmp(Listing(k).name( ...
+								end-1:end), '.m')
+							FileNames{end+1} = [path Listing(k).name]; %#ok<AGROW>
+						end
+					end
+				end
 			end
-    % Обработка каждого найденного файла
-        for k = 1:length(FileNames)
-            % Сохраним текущее количество наборов параметров
-                NumParams = length(Params);
+	% Обработка каждого найденного файла
+		for k = 1:length(FileNames)
+			% Сохраним текущее количество наборов параметров
+				NumParams = length(Params);
 
-            % Попробуем открыть файл с параметрами
-                try
-                    fid = fopen(FileNames{k});
-                catch
-                    if strcmp(LogLanguage, 'Russian')
-                        error(['Не удалось открыть файл настройки ', ...
-                            '%s!\n'], FileNames{k});
-                    else
-                        error('Failed to open setup file %s!\n', ...
-                            FileNames{k});
-                    end
-                end
-                
-            % Инициализация очередного набора параметров
-                BufParams = [];
-                
-            % Поочерёдное считывание строк из файла
-                tline = fgetl(fid);
+			% Попробуем открыть файл с параметрами
+				try
+					fid = fopen(FileNames{k});
+				catch
+					if strcmp(LogLanguage, 'Russian')
+						error(['Не удалось открыть файл настройки ', ...
+							'%s!\n'], FileNames{k});
+					else
+						error('Failed to open setup file %s!\n', ...
+							FileNames{k});
+					end
+				end
+				
+			% Инициализация очередного набора параметров
+				BufParams = [];
+				
+			% Поочерёдное считывание строк из файла
+				tline = fgetl(fid);
 				isComment = 0;
-                isFindEndOfParams = false; % это присвоение необходимо на
-                    % случай, если файл пустой
-                while ischar(tline)
+				isFindEndOfParams = false; % это присвоение необходимо на
+					% случай, если файл пустой
+				while ischar(tline)
 					if(startsWith(tline,'%{') && isComment == 0)
 						isComment = 1;
 					elseif(startsWith(tline,'%}') && isComment == 1)
@@ -129,45 +130,45 @@ function Params = ReadSetup(LogLanguage)
 					end;
 					% Считываем очередную строку файла
 					tline = fgetl(fid);
-                end
+				end
 
-            % Если файл закончился, и текущий набор параметров не пустой,
-            % то надо добавить его в качестве нового набора параметров
-                if ~isFindEndOfParams
-                    if ~isempty(BufParams)
-                        Params{end+1} = BufParams; %#ok<AGROW>
-                    end
-                end
+			% Если файл закончился, и текущий набор параметров не пустой,
+			% то надо добавить его в качестве нового набора параметров
+				if ~isFindEndOfParams
+					if ~isempty(BufParams)
+						Params{end+1} = BufParams; %#ok<AGROW>
+					end
+				end
 
-            % Закроем файл
-                fclose(fid);
+			% Закроем файл
+				fclose(fid);
 
-            % Вывод результата на экран
-                if strcmp(LogLanguage, 'Russian')
-                    fprintf(['%s Из файла %s считано %d наборов ', ...
-                        'параметров.\n'], datestr(now), FileNames{k}, ...
-                        length(Params) - NumParams);
-                else
-                    fprintf(['%s %d parameter sets are parsed from ', ...
-                        'file %s.\n'], datestr(now), length(Params) - ...
-                        NumParams, FileNames{k});
-                end
-                fprintf('\n');
-        end
-        
-    % Если не удалось собрать ни один набор параметров, то создадим пустой
-    % для выполнения расчётов с параметрами по умолчанию
-        if isempty(Params)
-            Params = cell(1);
-            % Вывод результата на экран
-                if strcmp(LogLanguage, 'Russian')
-                    fprintf(['%s Не найден ни один набор параметров, ', ...
-                        'поэтому будет выполнен один расчёт с ', ...
-                        'параметрами по умолчанию.\n'], datestr(now));
-                else
-                    fprintf(['%s No parameters were found thus one ', ...
-                        'calculation with default parameters will be ', ...
-                        'performed.\n'], datestr(now));
-                end                    
-                fprintf('\n');
-        end
+			% Вывод результата на экран
+				if strcmp(LogLanguage, 'Russian')
+					fprintf(['%s Из файла %s считано %d наборов ', ...
+						'параметров.\n'], datestr(now), FileNames{k}, ...
+						length(Params) - NumParams);
+				else
+					fprintf(['%s %d parameter sets are parsed from ', ...
+						'file %s.\n'], datestr(now), length(Params) - ...
+						NumParams, FileNames{k});
+				end
+				fprintf('\n');
+		end
+		
+	% Если не удалось собрать ни один набор параметров, то создадим пустой
+	% для выполнения расчётов с параметрами по умолчанию
+		if isempty(Params)
+			Params = cell(1);
+			% Вывод результата на экран
+				if strcmp(LogLanguage, 'Russian')
+					fprintf(['%s Не найден ни один набор параметров, ', ...
+						'поэтому будет выполнен один расчёт с ', ...
+						'параметрами по умолчанию.\n'], datestr(now));
+				else
+					fprintf(['%s No parameters were found thus one ', ...
+						'calculation with default parameters will be ', ...
+						'performed.\n'], datestr(now));
+				end					
+				fprintf('\n');
+		end

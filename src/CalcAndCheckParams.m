@@ -7,29 +7,29 @@ function Params = CalcAndCheckParams(inParams, LogLanguage)
 % конструкторов.
 
 % ѕересохраним входные данные
-    Params = inParams;
-    
+	Params = inParams;
+	
 % ≈сли в модели отключено декодирование, то в демодул€торе нужно
 % принудительно установить режим вынесени€ жЄстких решений, иначе не
 % удастс€ выполнить сравнение полученной и переданной информации
-    if Params.Encoder.isTransparent
-        Params.Mapper.DecisionMethod = 'Hard decision';
-    end
-    
+	if Params.Encoder.isTransparent
+		Params.Mapper.DecisionMethod = 'Hard decision';
+	end
+	
 % ѕроверка того, что в модул€тор поступает число бит, дел€щеес€ на log2(M)
-    if Params.Encoder.isTransparent
-        %  ак вариант, можно предусмотреть возможность набивани€ в
-        % передатчике и отбрасывани€ в приЄмнике дополнительных бит в
-        % классе Mapper
-        if mod(Params.Source.NumBitsPerFrame, ...
-                log2(Params.Mapper.ModulationOrder)) > 0
-            if strcmp(LogLanguage, 'Russian')
-                error(['¬ модул€тор поступает число бит не кратное ', ...
-                    'log2(M).']);
-            else
-                error(['The number of bits at the input of the ', ...
-                    'mapper is not multiple of log2(M).']);
-            end
-        end
-    end
-    
+	if Params.Encoder.isTransparent
+		%  ак вариант, можно предусмотреть возможность набивани€ в
+		% передатчике и отбрасывани€ в приЄмнике дополнительных бит в
+		% классе Mapper
+		if mod(Params.Source.NumBitsPerFrame, ...
+				log2(Params.Mapper.ModulationOrder)) > 0
+			if strcmp(LogLanguage, 'Russian')
+				error(['¬ модул€тор поступает число бит не кратное ', ...
+					'log2(M).']);
+			else
+				error(['The number of bits at the input of the ', ...
+					'mapper is not multiple of log2(M).']);
+			end
+		end
+	end
+	

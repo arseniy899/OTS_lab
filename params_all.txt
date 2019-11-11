@@ -15,9 +15,16 @@ Mapper.SymbolMapping = 'Gray';
 Mapper.DecisionMethod = 'Approximate log-likelihood ratio';
 Sig.isTransparent = true;
 
+RRCFilter.isTransparent = true;
+RRCFilter.rolloff  = 0.25;
+RRCFilter.span  = 6;
+RRCFilter.sps  = 4;
+
 Channel.isTransparent = true;
 Channel.Type = 'AWGN';
 Channel.FadingType = '';
+Channel.NumberOfRandomTimeShifts = 0;
+Channel.FreqShift = 0;
 
 BER.h2Precision = 2;
 BER.BERPrecision = 8;
