@@ -23,7 +23,7 @@ RRCFilter.sps  = 4;
 Channel.isTransparent = true;
 Channel.Type = 'AWGN';
 Channel.FadingType = '';
-Channel.NumberOfRandomTimeShifts = 0;
+Channel.PercentOfErrorBitsInFrame = 0;
 Channel.FreqShift = 0;
 
 BER.h2Precision = 2;

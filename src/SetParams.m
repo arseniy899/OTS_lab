@@ -136,7 +136,10 @@ function Mapper = SetParamsMapper(inMapper, ParamsNumber, ...
 		else
 			if ~(strcmp(Mapper.Type, 'QAM') || ...
 					strcmp(Mapper.Type, 'PSK')|| ...
-					strcmp(Mapper.Type, 'APSK'))
+					strcmp(Mapper.Type, 'DBPSK')|| ...
+					strcmp(Mapper.Type, 'DPSK')|| ...
+					strcmp(Mapper.Type, 'DQPSK')|| ...
+					strcmp(Mapper.Type, 'BPSK'))
 				if strcmp(LogLanguage, 'Russian')
 					error('Недопустимое значение Mapper.Type');
 				else
@@ -211,7 +214,7 @@ function RRCFilter = SetParamsRRCFilter(inRRCFilter, ParamsNumber, ...
 				if strcmp(LogLanguage, 'Russian')
 					error('Недопустимое значение RRCFilter.rolloff');
 				else
-					error('Invalid value Mapper.Type');
+					error('Invalid value RRCFilter.rolloff');
 				end
 			end
 		end
@@ -273,10 +276,21 @@ function Channel = SetParamsChannel(inChannel, ParamsNumber, ...
 			% Проверка корректности введённых значений
 		end
 		
-		if ~isfield(Channel, 'NumberOfRandomTimeShifts')
-			Channel.NumberOfRandomTimeShifts = 0;
+		if ~isfield(Channel, 'PercentOfErrorBitsInFrame')
+			Channel.PercentOfErrorBitsInFrame = 0;
 		else
 			% Проверка корректности введённых значений
+			if (Channel.PercentOfErrorBitsInFrame < 0 || ...
+					Channel.PercentOfErrorBitsInFrame > 1 )
+				if strcmp(LogLanguage, 'Russian')
+					error('Недопустимое значение Channel.PercentOfErrorBitsInFrame');
+				else
+					error('Invalid value Channel.PercentOfErrorBitsInFrame');
+				end
+			end
+		end
+		if ~isfield(Channel, 'NumberOfErrorBitsInFrame')
+			Channel.NumberOfErrorBitsInFrame = 0;
 		end
 
 end

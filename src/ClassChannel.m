@@ -4,8 +4,8 @@ classdef ClassChannel < handle
 			isTransparent;
 		% Переменная управления языком вывода информации для пользователя
 			LogLanguage;
-			
-			NumberOfRandomTimeShifts;
+			NumberOfErrorBitsInFrame;
+			PercentOfErrorBitsInFrame;
 			FreqShift;
 	end
 	properties (SetAccess = private) % Вычисляемые переменные
@@ -41,7 +41,9 @@ classdef ClassChannel < handle
 				% должно будет быть
 				% obj.Pbd = obj.Pb / Objs.Encoder.Rate;
 				
-			obj.NumberOfRandomTimeShifts = Channel.NumberOfRandomTimeShifts;
+			obj.PercentOfErrorBitsInFrame = 1 - Channel.PercentOfErrorBitsInFrame;
+			obj.NumberOfErrorBitsInFrame = Channel.NumberOfErrorBitsInFrame;
+			
 			obj.FreqShift = Channel.FreqShift;
 		end
 		function [OutData, InstChannelParams] = Step(obj, InData, h2dB)
@@ -50,7 +52,12 @@ classdef ClassChannel < handle
 				InstChannelParams.Variance = 1;
 				return
 			end
-
+			%{
+			if (obj.NumberOfErrorBitsInFrame ~= 0)
+				InData = [InData(obj.NumberOfErrorBitsInFrame:end);...
+					InData(1:obj.NumberOfErrorBitsInFrame)];
+			end;
+			%}	
 			% Сформируем АБГШ
 				Sigma = sqrt(obj.Pbd * 10^(-h2dB/10) / 2);
 				InstChannelParams.Variance = 2*Sigma^2;
@@ -61,14 +68,18 @@ classdef ClassChannel < handle
 			
 			% Добавим смещение по времени
 			
-			if (obj.NumberOfRandomTimeShifts ~= 0)
-				r = randi(length(OutData)-1,1,obj.NumberOfRandomTimeShifts);
-				for k = r
+			if (obj.PercentOfErrorBitsInFrame ~= 0)
+				datLen = length(OutData);
+% 				r = randi(length(OutData)-1,1,obj.NumberOfRandomTimeShifts);
+				NumberOfRandomTimeShifts = int32(obj.PercentOfErrorBitsInFrame ...
+					* datLen); 
+				delInd = int32(datLen-1):-1:NumberOfRandomTimeShifts;
+				for k = delInd
 					OutData(k)    = [];
-% 					OutData(end+1)    = 0;
 				end;
-				OutData = [OutData; zeros(obj.NumberOfRandomTimeShifts, 1)];
+				OutData = [OutData; zeros(length(delInd), 1)];
 			end;
+			
 			% Добавим смещение по частоте
 			if (obj.FreqShift ~= 0)
 				OutData = OutData .';

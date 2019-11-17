@@ -84,7 +84,7 @@ function Draw(DirName, varargin)
                             'LineWidth', 1, 'MarkerSize', 8, ...
                             'Marker', '.');
 						PlotLabel(h,['   ' Names{k} '   '],...
-							'location','random', 'xIndex',...
+							'location','right', 'xIndex',...
 							k/length(Names) *length(Res.h2dBs) );
 						angle = angle - 25;
 					%Getting info for SNR AT 10e-4
@@ -111,7 +111,7 @@ function Draw(DirName, varargin)
                             Res.NumTrFrames, 'LineWidth', 1, ...
                             'MarkerSize', 8, 'Marker', '.');
 						PlotLabel(h,['   ' Names{k} '   '],...
-							'location','random', 'xIndex',...
+							'location','right', 'xIndex',...
 							k/length(Names) *length(Res.h2dBs) );
             end
 			
@@ -291,7 +291,7 @@ switch lower(location)
         xi = xdata==x; 
         
     case {'right','east','rightmost','eastmost'}
-        horizontalAlignment = 'right'; 
+        horizontalAlignment = 'left'; 
         verticalAlignment = 'bottom'; 
         x = max(xdata(ind)); 
         y = ydata(xdata==x);
